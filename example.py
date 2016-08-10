@@ -21,6 +21,8 @@ from labscript_devices.PineBlaster import PineBlaster
 from labscript_devices.NI_PCI_6733 import NI_PCI_6733
 from labscript_utils.unitconversions import *
 
+# testing
+
 PulseBlaster(name='pulseblaster_0', board_number=0)
 ClockLine(name='pulseblaster_0_clockline_fast', pseudoclock=pulseblaster_0.pseudoclock, connection='flag 0')
 ClockLine(name='pulseblaster_0_clockline_slow', pseudoclock=pulseblaster_0.pseudoclock, connection='flag 1')
@@ -38,7 +40,7 @@ NI_PCI_6733(name='ni_card_1', parent_device=pineblaster_0.clockline, clock_termi
 AnalogOut( 'analog0', ni_card_1, 'ao0', unit_conversion_class=example1) # use the example1 conversion class located in pythonlib/unitconversions/example.py with default paremeters
 
 # same as above, but we are changing some parameters used in the conversion and specifying a prefix to be used with units. You can now program in mA, uA, mGauss, uGauss
-AnalogOut( 'analog1', ni_card_1, 'ao1', unit_conversion_class=example1, unit_conversion_parameters={'a':5, 'b':1, 'magnitudes':['m','u']}) 
+AnalogOut( 'analog1', ni_card_1, 'ao1', unit_conversion_class=example1, unit_conversion_parameters={'a':5, 'b':1, 'magnitudes':['m','u']})
 AnalogOut( 'analog2', ni_card_0, 'ao2')
 AnalogIn(   'input1', ni_card_0, 'ai0')
 Shutter(  'shutter1', ni_card_0, 'port0/line1', delay=(0,0))
@@ -54,9 +56,9 @@ DDS(          'dds4', pulseblaster_0.direct_outputs, 'dds 1')
 
 # This sets up the inputs/counters/etc that will monitor
 # The first paremeter is the name for the WaitMonitor device
-# The second and third paremeters are the device and channel respectively that goes high when a wait begins and low when it ends. This output should be   
+# The second and third paremeters are the device and channel respectively that goes high when a wait begins and low when it ends. This output should be
 # physically connected to a counter specified in the next two paremeters.
-# The final two paremeters specify the device/channel that is to trigger the pseudoclock if the WAIT instruction hits the specified timeout. The output of 
+# The final two paremeters specify the device/channel that is to trigger the pseudoclock if the WAIT instruction hits the specified timeout. The output of
 # this channel should be physicaly connect to the external trigger of the master pseudoclock.
 WaitMonitor('wait_monitor', ni_card_0, 'port0/line0', ni_card_0, 'ctr0', ni_card_0, 'pfi1')
 
